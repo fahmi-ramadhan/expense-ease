@@ -1,23 +1,8 @@
+const incomeData = require("../seeds/incomeData");
+
 class IncomeModel {
 	constructor() {
-		this.incomes = [
-			{
-				id: 1,
-				title: "Salary",
-				amount: 5000,
-				category: "Job",
-				description: "Monthly salary",
-				date: "2022-01-01",
-			},
-			{
-				id: 2,
-				title: "Freelance",
-				amount: 2000,
-				category: "Job",
-				description: "Freelance project",
-				date: "2022-01-15",
-			},
-		];
+		this.incomes = incomeData;
 	}
 
 	getIncomes() {

@@ -1,23 +1,8 @@
+const expenseData = require("../seeds/expenseData");
+
 class ExpenseModel {
 	constructor() {
-		this.expenses = [
-			{
-				id: 1,
-				title: "Rent",
-				amount: 1000,
-				category: "Housing",
-				description: "Monthly rent",
-				date: "2022-01-01",
-			},
-			{
-				id: 2,
-				title: "Groceries",
-				amount: 200,
-				category: "Food",
-				description: "Weekly groceries",
-				date: "2022-01-02",
-			},
-		];
+		this.expenses = expenseData;
 	}
 
 	getExpenses() {
