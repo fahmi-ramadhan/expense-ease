@@ -1,6 +1,8 @@
+const { v4: uuidv4 } = require("uuid");
+
 module.exports = [
 	{
-		id: 1,
+		id: uuidv4(),
 		title: "Rent",
 		amount: 1000,
 		category: "Housing",
@@ -8,7 +10,7 @@ module.exports = [
 		date: "2022-01-01",
 	},
 	{
-		id: 2,
+		id: uuidv4(),
 		title: "Groceries",
 		amount: 200,
 		category: "Food",
@@ -16,7 +18,7 @@ module.exports = [
 		date: "2022-01-02",
 	},
 	{
-		id: 3,
+		id: uuidv4(),
 		title: "Electricity",
 		amount: 100,
 		category: "Utilities",
@@ -24,7 +26,7 @@ module.exports = [
 		date: "2022-01-05",
 	},
 	{
-		id: 4,
+		id: uuidv4(),
 		title: "Internet",
 		amount: 50,
 		category: "Utilities",
@@ -32,7 +34,7 @@ module.exports = [
 		date: "2022-01-10",
 	},
 	{
-		id: 5,
+		id: uuidv4(),
 		title: "Car Insurance",
 		amount: 150,
 		category: "Insurance",
@@ -40,7 +42,7 @@ module.exports = [
 		date: "2022-01-15",
 	},
 	{
-		id: 6,
+		id: uuidv4(),
 		title: "Gas",
 		amount: 60,
 		category: "Transportation",
@@ -48,7 +50,7 @@ module.exports = [
 		date: "2022-01-20",
 	},
 	{
-		id: 7,
+		id: uuidv4(),
 		title: "Gym Membership",
 		amount: 30,
 		category: "Health",
@@ -56,7 +58,7 @@ module.exports = [
 		date: "2022-01-25",
 	},
 	{
-		id: 8,
+		id: uuidv4(),
 		title: "Dinner Out",
 		amount: 100,
 		category: "Entertainment",

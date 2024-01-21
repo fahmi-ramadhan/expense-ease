@@ -1,6 +1,8 @@
+const { v4: uuidv4 } = require("uuid");
+
 module.exports = [
 	{
-		id: 1,
+		id: uuidv4(),
 		title: "Salary",
 		amount: 5000,
 		category: "Job",
@@ -8,7 +10,7 @@ module.exports = [
 		date: "2022-01-01",
 	},
 	{
-		id: 2,
+		id: uuidv4(),
 		title: "Freelance",
 		amount: 2000,
 		category: "Job",
@@ -16,7 +18,7 @@ module.exports = [
 		date: "2022-01-15",
 	},
 	{
-		id: 3,
+		id: uuidv4(),
 		title: "Bonus",
 		amount: 1000,
 		category: "Job",
@@ -24,7 +26,7 @@ module.exports = [
 		date: "2022-02-01",
 	},
 	{
-		id: 4,
+		id: uuidv4(),
 		title: "Investment",
 		amount: 3000,
 		category: "Investment",
@@ -32,7 +34,7 @@ module.exports = [
 		date: "2022-02-15",
 	},
 	{
-		id: 5,
+		id: uuidv4(),
 		title: "Rental",
 		amount: 1500,
 		category: "Property",
@@ -40,7 +42,7 @@ module.exports = [
 		date: "2022-02-20",
 	},
 	{
-		id: 6,
+		id: uuidv4(),
 		title: "Dividends",
 		amount: 1200,
 		category: "Investment",
@@ -48,15 +50,15 @@ module.exports = [
 		date: "2022-03-01",
 	},
 	{
-		id: 7,
+		id: uuidv4(),
 		title: "Lottery",
-		amount: 50000,
+		amount: 5000,
 		category: "Other",
 		description: "Lottery prize",
 		date: "2022-03-15",
 	},
 	{
-		id: 8,
+		id: uuidv4(),
 		title: "Gift",
 		amount: 500,
 		category: "Other",
