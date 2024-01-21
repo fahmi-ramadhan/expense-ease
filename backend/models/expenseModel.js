@@ -1,4 +1,5 @@
 const expenseData = require("../seeds/expenseData");
+const { v4: uuidv4 } = require("uuid");
 
 class ExpenseModel {
 	constructor() {
@@ -14,13 +15,18 @@ class ExpenseModel {
 	}
 
 	addExpense(expense) {
-		this.expenses.push({ id: this.expenses.length + 1, ...expense });
+		const newExpense = { id: uuidv4(), ...expense };
+		this.incomes.push(newExpense);
+		this.sortExpensesByDate();
+		return newExpense;
 	}
 
 	updateExpense(id, expense) {
 		const index = this.expenses.findIndex((exp) => exp.id === id);
 		if (index !== -1) {
 			this.expenses[index] = { ...this.expenses[index], ...expense };
+			this.sortExpensesByDate();
+			return this.expenses[index];
 		}
 	}
 
@@ -29,6 +35,10 @@ class ExpenseModel {
 		if (index !== -1) {
 			this.expenses.splice(index, 1);
 		}
+	}
+
+	sortExpensesByDate() {
+		this.expenses.sort((a, b) => new Date(a.date) - new Date(b.date));
 	}
 }
 

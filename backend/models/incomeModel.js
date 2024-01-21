@@ -1,4 +1,5 @@
 const incomeData = require("../seeds/incomeData");
+const { v4: uuidv4 } = require("uuid");
 
 class IncomeModel {
 	constructor() {
@@ -14,13 +15,18 @@ class IncomeModel {
 	}
 
 	addIncome(income) {
-		this.incomes.push({ id: this.incomes.length + 1, ...income });
+		const newIncome = { id: uuidv4(), ...income };
+		this.incomes.push(newIncome);
+		this.sortIncomesByDate();
+		return newIncome;
 	}
 
 	updateIncome(id, income) {
 		const index = this.incomes.findIndex((inc) => inc.id === id);
 		if (index !== -1) {
 			this.incomes[index] = { ...this.incomes[index], ...income };
+			this.sortIncomesByDate();
+			return this.incomes[index];
 		}
 	}
 
@@ -29,6 +35,10 @@ class IncomeModel {
 		if (index !== -1) {
 			this.incomes.splice(index, 1);
 		}
+	}
+
+	sortIncomesByDate() {
+		this.incomes.sort((a, b) => new Date(a.date) - new Date(b.date));
 	}
 }
 

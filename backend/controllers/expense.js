@@ -9,6 +9,20 @@ exports.getExpenses = async (req, res) => {
 	}
 };
 
+exports.getExpenseById = async (req, res) => {
+	const { id } = req.params;
+
+	try {
+		const expense = IncomeModel.getExpenseById(id);
+		if (!expense) {
+			return res.status(404).json({ message: "Expense not found." });
+		}
+		res.status(200).json(expense);
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
+};
+
 exports.addExpense = async (req, res) => {
 	const { title, amount, category, description, date } = req.body;
 
@@ -29,8 +43,8 @@ exports.addExpense = async (req, res) => {
 				.status(400)
 				.json({ message: "Amount must be a positive number!" });
 		}
-		ExpenseModel.addExpense(expense);
-		res.status(200).json({ message: "Expense added." });
+		const newExpense = ExpenseModel.addExpense(expense);
+		res.status(200).json(newExpense);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
 	}
@@ -57,8 +71,8 @@ exports.updateExpense = async (req, res) => {
 				.status(400)
 				.json({ message: "Amount must be a positive number!" });
 		}
-		ExpenseModel.updateExpense(Number(id), expense);
-		res.status(200).json({ message: "Expense updated." });
+		const updatedExpense = ExpenseModel.updateExpense(id, expense);
+		res.status(200).json(updatedExpense);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
 	}
@@ -68,7 +82,7 @@ exports.deleteExpense = async (req, res) => {
 	const { id } = req.params;
 
 	try {
-		ExpenseModel.deleteExpense(Number(id));
+		ExpenseModel.deleteExpense(id);
 		res.status(200).json({ message: "Expense deleted." });
 	} catch (error) {
 		res.status(500).json({
