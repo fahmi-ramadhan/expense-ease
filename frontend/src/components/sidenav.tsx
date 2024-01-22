@@ -14,11 +14,6 @@ export default function SideNav() {
 						<p className="block px-4 py-2">Dashboard</p>
 					</Link>
 				</li>
-				<li className={pathName === "/transactions" ? "bg-gray-900" : ""}>
-					<Link href="/transactions">
-						<p className="block px-4 py-2">View Transactions</p>
-					</Link>
-				</li>
 				<li className={pathName === "/incomes" ? "bg-gray-900" : ""}>
 					<Link href="/incomes">
 						<p className="block px-4 py-2">Incomes</p>
