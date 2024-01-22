@@ -74,7 +74,7 @@ export default function Home() {
 					<h2 className="text-xl font-semibold mb-4">Recent History</h2>
 					<History transactionHistory={transactionHistory} />
 					<h2 className="my-4 flex items-center justify-between font-semibold">
-						Min <span className="text-xl font-semibold">Salary</span>Max
+						Min <span className="text-xl font-semibold">Income</span>Max
 					</h2>
 					<div className="bg-gray-100 border-2 border-white shadow-md p-4 rounded-xl flex justify-between items-center">
 						<p>${Math.min(...incomes.map((item) => item.amount))}</p>
