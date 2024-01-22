@@ -15,20 +15,26 @@ export const getExpenses = async () => {
 export const getIncomeById = async (id: string) => {
 	const response = await fetch(`http://localhost:5000/api/get-incomes/${id}`);
 	const data: Transaction = await response.json();
+	console.log(data);
+	return data;
+};
+
+export const getExpenseById = async (id: string) => {
+	const response = await fetch(`http://localhost:5000/api/get-expenses/${id}`);
+	const data: Transaction = await response.json();
 	return data;
 };
 
 export const deleteIncome = async (id: string) => {
-	const response = await fetch(
-		`http://localhost:5000/api/delete-income/${id}`,
-		{
-			method: "DELETE",
-		}
-	);
-	if (!response.ok) {
-		throw new Error("Network response was not ok");
-	}
-	return response.json();
+	await fetch(`http://localhost:5000/api/delete-income/${id}`, {
+		method: "DELETE",
+	});
+};
+
+export const deleteExpense = async (id: string) => {
+	await fetch(`http://localhost:5000/api/delete-expense/${id}`, {
+		method: "DELETE",
+	});
 };
 
 export const addIncome = async (income: Omit<Transaction, "id">) => {
@@ -43,6 +49,18 @@ export const addIncome = async (income: Omit<Transaction, "id">) => {
 	return newIncome;
 };
 
+export const addExpense = async (expense: Omit<Transaction, "id">) => {
+	const response = await fetch("http://localhost:5000/api/add-expense", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(expense),
+	});
+	const newExpense: Transaction = await response.json();
+	return newExpense;
+};
+
 export async function updateIncome(
 	id: string,
 	updatedIncome: Omit<Transaction, "id">
@@ -55,6 +73,24 @@ export async function updateIncome(
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(updatedIncome),
+		}
+	);
+	const data: Transaction = await response.json();
+	return data;
+}
+
+export async function updateExpense(
+	id: string,
+	updatedExpense: Omit<Transaction, "id">
+) {
+	const response = await fetch(
+		`http://localhost:5000/api/update-expense/${id}`,
+		{
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(updatedExpense),
 		}
 	);
 	const data: Transaction = await response.json();
