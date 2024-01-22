@@ -10,7 +10,7 @@ router
 	.put("/update-income/:id", incomeController.updateIncome)
 	.delete("/delete-income/:id", incomeController.deleteIncome)
 	.get("/get-expenses", expenseController.getExpenses)
-	.get("/get-expenses/:id", incomeController.getExpenseById)
+	.get("/get-expenses/:id", expenseController.getExpenseById)
 	.post("/add-expense", expenseController.addExpense)
 	.put("/update-expense/:id", expenseController.updateExpense)
 	.delete("/delete-expense/:id", expenseController.deleteExpense);
