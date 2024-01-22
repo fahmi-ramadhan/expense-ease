@@ -35,8 +35,8 @@ exports.addIncome = async (req, res) => {
 	};
 
 	try {
-		if (!title || !category || !description || !date) {
-			return res.status(400).json({ message: "All fields are required!" });
+		if (!title || !category || !date) {
+			return res.status(400).json({ message: "Missing some required fields" });
 		}
 		if (amount <= 0 || typeof amount !== "number") {
 			return res
@@ -63,8 +63,8 @@ exports.updateIncome = async (req, res) => {
 	};
 
 	try {
-		if (!title || !category || !description || !date) {
-			return res.status(400).json({ message: "All fields are required!" });
+		if (!title || !category || !date) {
+			return res.status(400).json({ message: "Missing some required fields" });
 		}
 		if (amount <= 0 || typeof amount !== "number") {
 			return res
