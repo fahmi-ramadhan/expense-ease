@@ -28,7 +28,7 @@ export default function Page({ params }: { params: { id: string } }) {
 			{income ? (
 				<EditForm initialData={income} updateIncome={handleUpdateIncome} />
 			) : (
-				<div>Loading...</div>
+				<h1 className="text-2xl">Loading...</h1>
 			)}
 		</div>
 	);

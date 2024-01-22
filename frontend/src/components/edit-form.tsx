@@ -1,22 +1,15 @@
 import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import Link from "next/link";
-
-interface InputState {
-	title: string;
-	amount: number;
-	category: string;
-	description: string;
-	date: string;
-}
+import { FormField } from "@/lib/definitions";
 
 export default function EditForm({
 	initialData,
 	updateIncome,
 }: {
-	initialData: InputState;
-	updateIncome: (income: InputState) => void;
+	initialData: FormField;
+	updateIncome: (income: FormField) => void;
 }) {
-	const [inputState, setInputState] = useState<InputState>(initialData);
+	const [inputState, setInputState] = useState<FormField>(initialData);
 	const { title, amount, category, description, date } = inputState;
 
 	useEffect(() => {
@@ -24,7 +17,7 @@ export default function EditForm({
 	}, [initialData]);
 
 	const handleInput =
-		(name: keyof InputState) =>
+		(name: keyof FormField) =>
 		(
 			e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 		) => {
@@ -80,7 +73,7 @@ export default function EditForm({
 					<option value="freelancing">Freelancing</option>
 					<option value="investments">Investments</option>
 					<option value="stocks">Stocks</option>
-					<option value="bitcoin">Bitcoin</option>
+					<option value="property">Property</option>
 					<option value="bank">Bank Transfer</option>
 					<option value="youtube">Youtube</option>
 					<option value="other">Other</option>

@@ -1,17 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-
-interface InputState {
-	title: string;
-	amount: number;
-	category: string;
-	description: string;
-	date: string;
-}
+import { FormField } from "@/lib/definitions";
 
 export default function Form({
 	addIncome,
 }: {
-	addIncome: (income: InputState) => void;
+	addIncome: (income: FormField) => void;
 }) {
 	const initialInputState = {
 		title: "",
@@ -21,11 +14,11 @@ export default function Form({
 		date: "",
 	};
 
-	const [inputState, setInputState] = useState<InputState>(initialInputState);
+	const [inputState, setInputState] = useState<FormField>(initialInputState);
 	const { title, amount, category, description, date } = inputState;
 
 	const handleInput =
-		(name: keyof InputState) =>
+		(name: keyof FormField) =>
 		(
 			e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 		) => {
@@ -50,18 +43,18 @@ export default function Form({
 				type="text"
 				value={title}
 				name="title"
-				placeholder="Salary Title"
+				placeholder="Income Title"
 				onChange={handleInput("title")}
-				className="w-full p-2 border border-gray-300 rounded"
+				className="w-full p-2 border border-gray-300 rounded-md placeholder:text-gray-500"
 			/>
 			<input
 				required
-				value={amount}
+				value={amount || ""}
 				type="number"
 				name={"amount"}
-				placeholder={"Salary Amount"}
+				placeholder={"Income Amount"}
 				onChange={handleInput("amount")}
-				className="w-full p-2 border border-gray-300 rounded"
+				className="w-full p-2 border border-gray-300 rounded-md placeholder:text-gray-500"
 			/>
 			<select
 				required
@@ -69,29 +62,47 @@ export default function Form({
 				name="category"
 				id="category"
 				onChange={handleInput("category")}
-				className="w-full p-2 border border-gray-300 rounded"
+				className={`w-full p-2 border border-gray-300 rounded-md ${
+					category ? "" : "text-gray-500"
+				}`}
 			>
 				<option value="" disabled>
-					Select Option
+					Select Category
 				</option>
-				<option value="salary">Salary</option>
-				<option value="freelancing">Freelancing</option>
-				<option value="investments">Investments</option>
-				<option value="stocks">Stocks</option>
-				<option value="bitcoin">Bitcoin</option>
-				<option value="bank">Bank Transfer</option>
-				<option value="youtube">Youtube</option>
-				<option value="other">Other</option>
+				<option value="salary" className="text-black">
+					Salary
+				</option>
+				<option value="freelancing" className="text-black">
+					Freelancing
+				</option>
+				<option value="investments" className="text-black">
+					Investments
+				</option>
+				<option value="stocks" className="text-black">
+					Stocks
+				</option>
+				<option value="property" className="text-black">
+					Property
+				</option>
+				<option value="bank" className="text-black">
+					Bank Transfer
+				</option>
+				<option value="youtube" className="text-black">
+					Youtube
+				</option>
+				<option value="other" className="text-black">
+					Other
+				</option>
 			</select>
 			<textarea
 				name="description"
 				value={description}
-				placeholder="Add A Reference"
+				placeholder="Description"
 				id="description"
 				cols={30}
 				rows={4}
 				onChange={handleInput("description")}
-				className="w-full p-2 border border-gray-300 rounded"
+				className="w-full p-2 border border-gray-300 rounded-md placeholder:text-gray-500"
 			></textarea>
 			<input
 				required
@@ -99,7 +110,9 @@ export default function Form({
 				value={date}
 				name="date"
 				onChange={handleInput("date")}
-				className="w-full p-2 border border-gray-300 rounded"
+				className={`w-full p-2 border border-gray-300 rounded-md ${
+					date ? "" : "text-gray-500"
+				}`}
 			/>
 			<button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
 				Add Income
