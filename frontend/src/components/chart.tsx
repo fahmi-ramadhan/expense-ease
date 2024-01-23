@@ -30,31 +30,32 @@ export default function Chart({
 	incomes: Transaction[];
 	expenses: Transaction[];
 }) {
+	const allDates = Array.from(
+		new Set([...incomes, ...expenses].map((transaction) => transaction.date))
+	).sort();
+
+	const incomeData = allDates.map((date) => {
+		const transaction = incomes.find((income) => income.date === date);
+		return transaction ? transaction.amount : 0;
+	});
+
+	const expenseData = allDates.map((date) => {
+		const transaction = expenses.find((expense) => expense.date === date);
+		return transaction ? transaction.amount : 0;
+	});
+
 	const data = {
-		labels: incomes.map((inc) => {
-			const { date } = inc;
-			return date;
-		}),
+		labels: allDates,
 		datasets: [
 			{
 				label: "Income",
-				data: [
-					...incomes.map((income) => {
-						const { amount } = income;
-						return amount;
-					}),
-				],
+				data: incomeData,
 				backgroundColor: "green",
 				tension: 0.2,
 			},
 			{
 				label: "Expenses",
-				data: [
-					...expenses.map((expense) => {
-						const { amount } = expense;
-						return amount;
-					}),
-				],
+				data: expenseData,
 				backgroundColor: "red",
 				tension: 0.2,
 			},
