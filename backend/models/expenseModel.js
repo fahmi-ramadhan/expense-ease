@@ -16,7 +16,7 @@ class ExpenseModel {
 
 	addExpense(expense) {
 		const newExpense = { id: uuidv4(), ...expense };
-		this.incomes.push(newExpense);
+		this.expenses.push(newExpense);
 		this.sortExpensesByDate();
 		return newExpense;
 	}
