@@ -2,66 +2,70 @@
 
 import React, { useEffect, useState } from "react";
 import type { Transaction } from "@/lib/definitions";
+import { getExpenses, deleteExpense, addExpense } from "@/lib/actions";
+import Form from "@/components/add-form";
+import Search from "@/components/search";
+import TransactionItem from "@/components/transaction-item";
 
 export default function Home() {
 	const [expenses, setExpenses] = useState<Transaction[]>([]);
 
 	useEffect(() => {
-		fetch("http://localhost:5000/api/get-expenses")
-			.then((response) => response.json())
-			.then((data) => {
-				setExpenses(data);
-			})
+		getExpenses()
+			.then(setExpenses)
 			.catch((error) => {
 				console.error("Error fetching expenses:", error);
 			});
 	}, []);
 
-	const handleEdit = (id: string) => {
-		console.log(`Edit expense with id: ${id}`);
+	const handleDelete = (id: string) => {
+		deleteExpense(id)
+			.then(() => {
+				setExpenses(expenses.filter((expense) => expense.id !== id));
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+			});
 	};
 
-	const handleDelete = (id: string) => {
-		console.log(`Delete expense with id: ${id}`);
+	const handleAddExpense = async (expense: Omit<Transaction, "id">) => {
+		try {
+			const newExpense = await addExpense(expense);
+			console.log(newExpense);
+			setExpenses((prevExpenses) => {
+				const updatedExpenses = [...prevExpenses, newExpense];
+				updatedExpenses.sort(
+					(a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+				);
+				return updatedExpenses;
+			});
+		} catch (error) {
+			console.error("An error occurred while adding the expense:", error);
+		}
 	};
 
 	return (
 		<main className="flex flex-col">
-			<h1 className="text-2xl font-bold mb-4">Expenses</h1>
-			<table className="table-auto border-collapse w-full">
-				<thead>
-					<tr className="bg-gray-800 text-white">
-						<th className="px-4 py-2">Title</th>
-						<th className="px-4 py-2">Amount</th>
-						<th className="px-4 py-2">Category</th>
-						<th className="px-4 py-2">Description</th>
-						<th className="px-4 py-2">Date</th>
-						<th className="px-4 py-2">Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					{expenses.map((expense, index) => (
-						<tr
-							key={expense.id}
-							className={index % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}
-						>
-							<td className="border px-4 py-2">{expense.title}</td>
-							<td className="border px-4 py-2">{expense.amount}</td>
-							<td className="border px-4 py-2">{expense.category}</td>
-							<td className="border px-4 py-2">{expense.description}</td>
-							<td className="border px-4 py-2">{expense.date}</td>
-							<td className="border px-4 py-2">
-								<div className="space-x-2">
-									<button onClick={() => handleEdit(expense.id)}>Edit</button>
-									<button onClick={() => handleDelete(expense.id)}>
-										Delete
-									</button>
-								</div>
-							</td>
-						</tr>
-					))}
-				</tbody>
-			</table>
+			<h1 className="text-2xl font-bold md:block hidden">Expenses</h1>
+			<div className="flex gap-4 mt-4">
+				<div className="w-full md:w-1/4">
+					<Form addTransaction={handleAddExpense} transactionType="expense" />
+				</div>
+				<div className="w-full md:w-3/4">
+					<div className="w-full mb-4 flex items-center justify-between gap-2">
+						<Search placeholder="Search expense..." />
+					</div>
+					{[...expenses].reverse().map((expense) => {
+						return (
+							<TransactionItem
+								transaction={{ ...expense, type: "expense" as "expense" }}
+								handleDelete={handleDelete}
+								key={expense.id}
+							/>
+						);
+					})}
+				</div>
+			</div>
 		</main>
 	);
 }
