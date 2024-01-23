@@ -46,10 +46,10 @@ export default function Home() {
 
 	return (
 		<main className="flex flex-col">
-			<h1 className="text-2xl font-bold">Incomes</h1>
+			<h1 className="text-2xl font-bold md:block hidden">Incomes</h1>
 			<div className="flex gap-4 mt-4">
 				<div className="w-full md:w-1/4">
-					<Form addIncome={handleAddIncome} />
+					<Form addTransaction={handleAddIncome} transactionType="income" />
 				</div>
 				<div className="w-full md:w-3/4">
 					<div className="w-full mb-4 flex items-center justify-between gap-2">
@@ -60,6 +60,7 @@ export default function Home() {
 							<TransactionItem
 								transaction={{ ...income, type: "income" as "income" }}
 								handleDelete={handleDelete}
+								key={income.id}
 							/>
 						);
 					})}

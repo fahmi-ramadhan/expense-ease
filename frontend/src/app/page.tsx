@@ -49,7 +49,7 @@ export default function Home() {
 
 	return (
 		<>
-			<h1 className="text-2xl font-bold">All Transactions</h1>
+			<h1 className="text-2xl font-bold md:block hidden">All Transactions</h1>
 			<div className="grid grid-cols-5 gap-4 mt-4">
 				<div className="col-span-3 h-96">
 					<Chart incomes={incomes} expenses={expenses} />
