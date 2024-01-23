@@ -99,7 +99,6 @@ export default function Form({
 				value={description}
 				placeholder="Description"
 				id="description"
-				cols={30}
 				rows={4}
 				onChange={handleInput("description")}
 				className="w-full p-2 border border-gray-300 rounded-md placeholder:text-gray-500"

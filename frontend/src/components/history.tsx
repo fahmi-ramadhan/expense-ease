@@ -14,7 +14,7 @@ export default function History({
 				return (
 					<div
 						key={id}
-						className="bg-gray-100 border-2 border-white shadow-md p-4 rounded-xl flex justify-between items-center"
+						className="bg-gray-50 border-2 border-white shadow-md p-4 rounded-xl flex justify-between items-center"
 					>
 						<p
 							className={type === "expense" ? "text-red-500" : "text-green-500"}

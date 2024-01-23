@@ -26,7 +26,7 @@ export default function Home() {
 	};
 
 	return (
-		<main className="flex flex-col items-center justify-center p-6">
+		<main className="flex flex-col">
 			<h1 className="text-2xl font-bold mb-4">Expenses</h1>
 			<table className="table-auto border-collapse w-full">
 				<thead>

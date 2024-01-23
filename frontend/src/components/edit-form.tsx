@@ -43,7 +43,7 @@ export default function EditForm({
 					name="title"
 					placeholder="Salary Title"
 					onChange={handleInput("title")}
-					className="w-full p-2 border border-gray-300 rounded"
+					className="w-full p-2 border border-gray-300 rounded-md"
 				/>
 			</div>
 			<div className="input-control">
@@ -54,7 +54,7 @@ export default function EditForm({
 					name={"amount"}
 					placeholder={"Salary Amount"}
 					onChange={handleInput("amount")}
-					className="w-full p-2 border border-gray-300 rounded"
+					className="w-full p-2 border border-gray-300 rounded-md"
 				/>
 			</div>
 			<div className="selects input-control">
@@ -64,7 +64,7 @@ export default function EditForm({
 					name="category"
 					id="category"
 					onChange={handleInput("category")}
-					className="w-full p-2 border border-gray-300 rounded"
+					className="w-full p-2 border border-gray-300 rounded-md"
 				>
 					<option value="" disabled>
 						Select Option
@@ -88,7 +88,7 @@ export default function EditForm({
 					cols={30}
 					rows={4}
 					onChange={handleInput("description")}
-					className="w-full p-2 border border-gray-300 rounded"
+					className="w-full p-2 border border-gray-300 rounded-md"
 				></textarea>
 			</div>
 			<div className="input-control">
@@ -98,7 +98,7 @@ export default function EditForm({
 					value={date}
 					name="date"
 					onChange={handleInput("date")}
-					className="w-full p-2 border border-gray-300 rounded"
+					className="w-full p-2 border border-gray-300 rounded-md"
 				/>
 			</div>
 			<div className="mt-6 flex justify-end gap-4">

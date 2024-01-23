@@ -24,11 +24,14 @@ export default function Page({ params }: { params: { id: string } }) {
 	};
 
 	return (
-		<div>
+		<div className="flex flex-col min-h-screen">
 			{income ? (
-				<EditForm initialData={income} updateIncome={handleUpdateIncome} />
+				<div className="w-full mx-auto overflow-hidden">
+					<h1 className="text-2xl font-bold mb-4">Edit Income</h1>
+					<EditForm initialData={income} updateIncome={handleUpdateIncome} />
+				</div>
 			) : (
-				<h1 className="text-2xl">Loading...</h1>
+				<h1 className="text-2xl font-bold">Loading...</h1>
 			)}
 		</div>
 	);

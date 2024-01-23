@@ -57,8 +57,8 @@ export default function TransactionItem({
 	};
 
 	return (
-		<div className="bg-gray-100 border-2 border-white shadow-md rounded-lg p-2 mb-2 flex items-center gap-2 text-gray-800">
-			<div className="w-16 h-16 bg-gray-50 flex items-center justify-center border-2 border-white rounded-lg">
+		<div className="bg-gray-50 border-2 border-white shadow-md rounded-lg p-2 mb-2 flex items-center gap-2 text-gray-800">
+			<div className="w-16 h-16 bg-gray-100 flex items-center justify-center border-2 border-white rounded-lg">
 				{type === "income" ? incomeIcon() : expenseIcon()}
 			</div>
 			<div className="flex items-center w-full justify-between pr-4">

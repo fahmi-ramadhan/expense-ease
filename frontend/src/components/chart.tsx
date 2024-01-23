@@ -62,7 +62,7 @@ export default function Chart({
 	};
 
 	return (
-		<div className="bg-gray-100 border-2 border-white shadow-md p-4 rounded-xl h-full">
+		<div className="bg-gray-50 border-2 border-white shadow-md p-4 rounded-xl h-full">
 			<Line data={data} />
 		</div>
 	);

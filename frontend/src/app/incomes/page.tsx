@@ -6,7 +6,6 @@ import { getIncomes, deleteIncome, addIncome } from "@/lib/actions";
 import Form from "@/components/add-form";
 import Search from "@/components/search";
 import TransactionItem from "@/components/transaction-item";
-import Link from "next/link";
 
 export default function Home() {
 	const [incomes, setIncomes] = useState<Transaction[]>([]);
@@ -46,9 +45,9 @@ export default function Home() {
 	};
 
 	return (
-		<main className="flex flex-col items-center justify-center">
+		<main className="flex flex-col">
 			<h1 className="text-2xl font-bold">Incomes</h1>
-			<div className="flex gap-4 w-full mt-8">
+			<div className="flex gap-4 mt-4">
 				<div className="w-full md:w-1/4">
 					<Form addIncome={handleAddIncome} />
 				</div>
