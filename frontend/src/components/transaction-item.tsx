@@ -37,18 +37,18 @@ export default function TransactionItem({
 		switch (category) {
 			case "education":
 				return <i className="fa-solid fa-book-open text-4xl"></i>;
-			case "groceries":
+			case "food":
 				return <i className="fa-solid fa-bowl-food text-4xl"></i>;
 			case "health":
 				return <i className="fa-solid fa-briefcase-medical text-4xl"></i>;
 			case "subscriptions":
 				return <i className="fa-solid fa-tv text-4xl"></i>;
-			case "takeaways":
-				return <i className="fa-solid fa-tv text-4xl"></i>;
+			case "housing":
+				return <i className="fa-solid fa-building text-4xl"></i>;
 			case "clothing":
 				return <i className="fa-solid fa-shirt text-4xl"></i>;
 			case "travelling":
-				return <i className="fa-solid fa-earth-americas text-4xl"></i>;
+				return <i className="fa-solid fa-earth-asia text-4xl"></i>;
 			case "other":
 				return <i className="fa-solid fa-circle-dot text-4xl"></i>;
 			default:
@@ -79,7 +79,7 @@ export default function TransactionItem({
 					</div>
 				</div>
 				<div className="flex gap-4">
-					<Link href={`/incomes/${id}/edit`}>
+					<Link href={`/${type}s/${id}/edit`}>
 						<i className="fa-solid fa-pen-to-square text-2xl"></i>
 					</Link>
 					<button
