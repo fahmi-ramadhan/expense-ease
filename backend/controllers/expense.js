@@ -13,7 +13,7 @@ exports.getExpenseById = async (req, res) => {
 	const { id } = req.params;
 
 	try {
-		const expense = IncomeModel.getExpenseById(id);
+		const expense = ExpenseModel.getExpenseById(id);
 		if (!expense) {
 			return res.status(404).json({ message: "Expense not found." });
 		}
