@@ -63,8 +63,11 @@ export default function Chart({
 	};
 
 	return (
-		<div className="bg-gray-50 border-2 border-white shadow-md p-4 rounded-xl h-full">
-			<Line data={data} />
+		<div className="bg-gray-50 border-2 border-white shadow-md p-4 rounded-xl h-56 sm:h-72 md:h-80 lg:h-96">
+			<Line
+				data={data}
+				options={{ responsive: true, maintainAspectRatio: false }}
+			/>
 		</div>
 	);
 }

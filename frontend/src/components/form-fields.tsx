@@ -27,7 +27,7 @@ export default function FormFields({
 					transactionType.charAt(0).toUpperCase() + transactionType.slice(1)
 				} Title`}
 				onChange={handleInput("title")}
-				className="w-full p-2 border border-gray-300 rounded-md placeholder:text-gray-500"
+				className="w-full p-2 border border-gray-300 rounded-md text-sm placeholder:text-gray-500"
 			/>
 			<input
 				required
@@ -38,7 +38,7 @@ export default function FormFields({
 					transactionType.charAt(0).toUpperCase() + transactionType.slice(1)
 				} Amount`}
 				onChange={handleInput("amount")}
-				className="w-full p-2 border border-gray-300 rounded-md placeholder:text-gray-500"
+				className="w-full p-2 border border-gray-300 rounded-md text-sm placeholder:text-gray-500"
 			/>
 			<select
 				required
@@ -46,7 +46,7 @@ export default function FormFields({
 				name="category"
 				id="category"
 				onChange={handleInput("category")}
-				className={`w-full p-2 border border-gray-300 rounded-md ${
+				className={`w-full p-2 border border-gray-300 rounded-md text-sm ${
 					category ? "" : "text-gray-500"
 				}`}
 			>
@@ -106,7 +106,8 @@ export default function FormFields({
 				id="description"
 				rows={4}
 				onChange={handleInput("description")}
-				className="w-full p-2 border border-gray-300 rounded-md placeholder:text-gray-500"
+				maxLength={100}
+				className="w-full p-2 border border-gray-300 rounded-md placeholder:text-gray-500 text-sm"
 			></textarea>
 			<input
 				required
@@ -114,7 +115,7 @@ export default function FormFields({
 				value={date}
 				name="date"
 				onChange={handleInput("date")}
-				className={`w-full p-2 border border-gray-300 rounded-md ${
+				className={`w-full p-2 border border-gray-300 rounded-md text-sm ${
 					date ? "" : "text-gray-500"
 				}`}
 			/>

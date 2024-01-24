@@ -50,34 +50,34 @@ export default function Home() {
 	return (
 		<>
 			<h1 className="text-2xl font-bold md:block hidden">All Transactions</h1>
-			<div className="grid grid-cols-5 gap-4 mt-4">
-				<div className="col-span-3 h-96">
+			<div className="flex flex-col sm:flex-row mt-2 sm:mt-4 gap-4">
+				<div className="flex flex-col w-full sm:w-3/5 h-full gap-2 sm:gap-4">
 					<Chart incomes={incomes} expenses={expenses} />
-					<div className="grid grid-cols-4 gap-4 mt-4">
-						<div className="grid col-span-2 bg-gray-50 border-2 border-white shadow-md p-4 rounded-xl">
+					<div className="flex gap-2 sm:gap-4">
+						<div className="w-full md:w-1/2 bg-gray-50 border-2 border-white shadow-md p-4 rounded-xl">
 							<h2 className="font-semibold">Total Incomes</h2>
-							<p className="text-4xl opacity-80 font-semibold">
+							<p className="text-2xl sm:text-3xl lg:text-4xl opacity-80 font-semibold">
 								<i className="fa-solid fa-dollar-sign"></i>
 								{totalIncomes}
 							</p>
 						</div>
-						<div className="grid col-span-2 bg-gray-50 border-2 border-white shadow-md p-4 rounded-xl">
+						<div className="w-full md:w-1/2 bg-gray-50 border-2 border-white shadow-md p-4 rounded-xl">
 							<h2 className="font-semibold">Total Expenses</h2>
-							<p className="text-4xl opacity-80 font-semibold">
+							<p className="text-2xl sm:text-3xl lg:text-4xl opacity-80 font-semibold">
 								<i className="fa-solid fa-dollar-sign"></i>
 								{totalExpenses}
 							</p>
 						</div>
-						<div className="col-start-2 col-end-4 flex flex-col justify-center items-center bg-gray-50 border-2 border-white shadow-md p-4 rounded-xl">
-							<h2 className="font-semibold">Total Balance</h2>
-							<p className="text-green-500 opacity-80 text-4xl font-semibold">
-								<i className="fa-solid fa-dollar-sign"></i>
-								{totalIncomes - totalExpenses}
-							</p>
-						</div>
+					</div>
+					<div className="w-full flex flex-col justify-center items-center bg-gray-50 border-2 border-white shadow-md p-4 rounded-xl">
+						<h2 className="font-semibold">Total Balance</h2>
+						<p className="text-green-500 text-2xl sm:text-3xl lg:text-4xl opacity-80 font-semibold">
+							<i className="fa-solid fa-dollar-sign"></i>
+							{totalIncomes - totalExpenses}
+						</p>
 					</div>
 				</div>
-				<div className="col-span-2">
+				<div className="flex flex-col w-full sm:w-2/5">
 					<h2 className="text-xl font-semibold mb-2">Recent History</h2>
 					<History transactionHistory={transactionHistory} />
 					<h2 className="my-2 mt-4 flex items-center justify-between font-semibold">

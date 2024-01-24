@@ -62,7 +62,7 @@ export default function Navigation() {
 				</button>
 			</div>
 			{(isNavOpen || window.innerWidth >= 768) && (
-				<div className="flex flex-col grow bg-gray-100 border-2 border-white shadow-md p-4 gap-2 rounded-xl bg-opacity-80 mt-4 md:mt-0">
+				<div className="flex flex-col grow bg-gray-100 border-2 border-white shadow-md p-2 sm:p-4 sm:gap-2 rounded-xl bg-opacity-80 mt-2 sm:mt-4 md:mt-0">
 					{tabs.map((tab) => (
 						<Link
 							key={tab.href}

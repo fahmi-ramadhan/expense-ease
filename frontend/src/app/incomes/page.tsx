@@ -6,6 +6,7 @@ import { getIncomes, deleteIncome, addIncome } from "@/lib/actions";
 import Form from "@/components/add-form";
 import Search from "@/components/search";
 import TransactionItem from "@/components/transaction-item";
+import Modal from "@/components/modal";
 
 export default function Page({
 	searchParams,
@@ -18,6 +19,8 @@ export default function Page({
 
 	const [allIncomes, setAllIncomes] = useState<Transaction[]>([]);
 	const [incomes, setIncomes] = useState<Transaction[]>([]);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		getIncomes()
@@ -32,6 +35,7 @@ export default function Page({
 							income.description.toLowerCase().includes(query.toLowerCase())
 					)
 				);
+				setIsLoading(false);
 			})
 			.catch((error) => {
 				console.error("Error fetching incomes:", error);
@@ -89,24 +93,39 @@ export default function Page({
 		<main className="flex flex-col">
 			<h1 className="text-2xl font-bold md:block hidden">Incomes</h1>
 			<div className="flex gap-4 mt-4">
-				<div className="w-full md:w-1/4">
+				<div className="w-1/4 lg:block hidden">
 					<Form addTransaction={handleAddIncome} transactionType="income" />
 				</div>
-				<div className="w-full md:w-3/4">
+				<div className="w-full lg:w-3/4">
 					<div className="w-full mb-4 flex items-center justify-between gap-2">
 						<Search placeholder="Search income..." />
+						<button
+							className="lg:hidden bg-gray-800 text-white text-sm p-2 rounded-md"
+							onClick={() => setIsModalOpen(true)}
+						>
+							Add Income
+						</button>
 					</div>
-					{[...incomes].reverse().map((income) => {
-						return (
-							<TransactionItem
-								transaction={{ ...income, type: "income" as "income" }}
-								handleDelete={handleDelete}
-								key={income.id}
-							/>
-						);
-					})}
+					{isLoading ? (
+						<div className="flex justify-center">
+							<div className="border-4 border-gray-200 rounded-full h-8 w-8 mt-2 animate-spin border-t-gray-800"></div>
+						</div>
+					) : (
+						[...incomes].reverse().map((income) => {
+							return (
+								<TransactionItem
+									transaction={{ ...income, type: "income" as "income" }}
+									handleDelete={handleDelete}
+									key={income.id}
+								/>
+							);
+						})
+					)}
 				</div>
 			</div>
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+				<Form addTransaction={handleAddIncome} transactionType="income" />
+			</Modal>
 		</main>
 	);
 }

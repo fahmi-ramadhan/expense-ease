@@ -27,12 +27,12 @@ export default function RootLayout({
 					referrerPolicy="no-referrer"
 				/>
 			</head>
-			<body className={inter.className}>
-				<div className="flex h-screen flex-col md:flex-row md:overflow-hidden gap-4 p-4">
-					<div className="w-full flex-none md:w-64">
+			<body className={`${inter.className} `}>
+				<div className="flex h-screen flex-col md:flex-row md:overflow-hidden gap-2 sm:gap-4 p-2 sm:p-4">
+					<div className="w-full flex-none md:w-48">
 						<Navigation />
 					</div>
-					<div className="flex-grow md:overflow-y-auto p-4 md:p-10 border-2 border-white bg-gray-100 shadow-md rounded-xl bg-opacity-80 text-gray-900">
+					<div className="flex-grow md:overflow-y-auto p-2 sm:p-4 md:p-10 border-2 border-white bg-gray-100 shadow-md rounded-xl bg-opacity-80 text-gray-900">
 						{children}
 					</div>
 				</div>
