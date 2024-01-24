@@ -7,21 +7,65 @@ import Form from "@/components/add-form";
 import Search from "@/components/search";
 import TransactionItem from "@/components/transaction-item";
 
-export default function Home() {
+export default function Page({
+	searchParams,
+}: {
+	searchParams?: {
+		query?: string;
+	};
+}) {
+	const query = searchParams?.query || "";
+
+	const [allExpenses, setAllExpenses] = useState<Transaction[]>([]);
 	const [expenses, setExpenses] = useState<Transaction[]>([]);
 
 	useEffect(() => {
 		getExpenses()
-			.then(setExpenses)
+			.then((expenses: Transaction[]) => {
+				setAllExpenses(expenses);
+				setExpenses(
+					expenses.filter(
+						(expense) =>
+							expense.title.toLowerCase().includes(query.toLowerCase()) ||
+							expense.amount.toString().includes(query) ||
+							expense.category.toLowerCase().includes(query.toLowerCase()) ||
+							expense.description.toLowerCase().includes(query.toLowerCase())
+					)
+				);
+			})
 			.catch((error) => {
 				console.error("Error fetching expenses:", error);
 			});
 	}, []);
 
+	useEffect(() => {
+		setExpenses(
+			allExpenses.filter(
+				(expense) =>
+					expense.title.toLowerCase().includes(query.toLowerCase()) ||
+					expense.amount.toString().includes(query) ||
+					expense.category.toLowerCase().includes(query.toLowerCase()) ||
+					expense.description.toLowerCase().includes(query.toLowerCase())
+			)
+		);
+	}, [query, allExpenses]);
+
 	const handleDelete = (id: string) => {
 		deleteExpense(id)
 			.then(() => {
-				setExpenses(expenses.filter((expense) => expense.id !== id));
+				const updatedExpenses = allExpenses.filter(
+					(expense) => expense.id !== id
+				);
+				setAllExpenses(updatedExpenses);
+				setExpenses(
+					updatedExpenses.filter(
+						(expense) =>
+							expense.title.toLowerCase().includes(query.toLowerCase()) ||
+							expense.amount.toString().includes(query) ||
+							expense.category.toLowerCase().includes(query.toLowerCase()) ||
+							expense.description.toLowerCase().includes(query.toLowerCase())
+					)
+				);
 			})
 			.catch((error) => {
 				console.error("Error:", error);
@@ -31,8 +75,7 @@ export default function Home() {
 	const handleAddExpense = async (expense: Omit<Transaction, "id">) => {
 		try {
 			const newExpense = await addExpense(expense);
-			console.log(newExpense);
-			setExpenses((prevExpenses) => {
+			setAllExpenses((prevExpenses) => {
 				const updatedExpenses = [...prevExpenses, newExpense];
 				updatedExpenses.sort(
 					(a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()

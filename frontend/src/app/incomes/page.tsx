@@ -7,21 +7,63 @@ import Form from "@/components/add-form";
 import Search from "@/components/search";
 import TransactionItem from "@/components/transaction-item";
 
-export default function Home() {
+export default function Page({
+	searchParams,
+}: {
+	searchParams?: {
+		query?: string;
+	};
+}) {
+	const query = searchParams?.query || "";
+
+	const [allIncomes, setAllIncomes] = useState<Transaction[]>([]);
 	const [incomes, setIncomes] = useState<Transaction[]>([]);
 
 	useEffect(() => {
 		getIncomes()
-			.then(setIncomes)
+			.then((incomes: Transaction[]) => {
+				setAllIncomes(incomes);
+				setIncomes(
+					incomes.filter(
+						(income) =>
+							income.title.toLowerCase().includes(query.toLowerCase()) ||
+							income.amount.toString().includes(query) ||
+							income.category.toLowerCase().includes(query.toLowerCase()) ||
+							income.description.toLowerCase().includes(query.toLowerCase())
+					)
+				);
+			})
 			.catch((error) => {
 				console.error("Error fetching incomes:", error);
 			});
 	}, []);
 
+	useEffect(() => {
+		setIncomes(
+			allIncomes.filter(
+				(income) =>
+					income.title.toLowerCase().includes(query.toLowerCase()) ||
+					income.amount.toString().includes(query) ||
+					income.category.toLowerCase().includes(query.toLowerCase()) ||
+					income.description.toLowerCase().includes(query.toLowerCase())
+			)
+		);
+	}, [query, allIncomes]);
+
 	const handleDelete = (id: string) => {
 		deleteIncome(id)
 			.then(() => {
-				setIncomes(incomes.filter((income) => income.id !== id));
+				const updatedIncomes = allIncomes.filter((income) => income.id !== id);
+				setAllIncomes(updatedIncomes);
+				setIncomes(
+					updatedIncomes.filter(
+						(income) =>
+							income.title.toLowerCase().includes(query.toLowerCase()) ||
+							income.amount.toString().includes(query) ||
+							income.category.toLowerCase().includes(query.toLowerCase()) ||
+							income.description.toLowerCase().includes(query.toLowerCase())
+					)
+				);
 			})
 			.catch((error) => {
 				console.error("Error:", error);
@@ -31,8 +73,7 @@ export default function Home() {
 	const handleAddIncome = async (income: Omit<Transaction, "id">) => {
 		try {
 			const newIncome = await addIncome(income);
-			console.log(newIncome);
-			setIncomes((prevIncomes) => {
+			setAllIncomes((prevIncomes) => {
 				const updatedIncomes = [...prevIncomes, newIncome];
 				updatedIncomes.sort(
 					(a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
