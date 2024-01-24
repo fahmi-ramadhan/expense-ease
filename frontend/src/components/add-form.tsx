@@ -52,7 +52,7 @@ export default function Form({
 				inputState={inputState}
 				handleInput={handleInput}
 			/>
-			<button className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 w-1/2">
+			<button className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-600 w-1/2">
 				{`Add ${
 					transactionType.charAt(0).toUpperCase() + transactionType.slice(1)
 				}`}

@@ -80,14 +80,14 @@ export default function TransactionItem({
 				</div>
 				<div className="flex gap-4">
 					<Link href={`/${type}s/${id}/edit`}>
-						<i className="fa-solid fa-pen-to-square text-2xl"></i>
+						<i className="fa-solid fa-pen-to-square text-2xl hover:text-gray-600"></i>
 					</Link>
 					<button
 						onClick={() => {
 							handleDelete(id);
 						}}
 					>
-						<i className="fa-solid fa-trash text-2xl"></i>
+						<i className="fa-solid fa-trash text-2xl hover:text-gray-600"></i>
 					</button>
 				</div>
 			</div>

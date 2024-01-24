@@ -56,7 +56,7 @@ export default function EditForm({
 				>
 					Cancel
 				</Link>
-				<button className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700">
+				<button className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-600">
 					{`Edit ${
 						transactionType.charAt(0).toUpperCase() + transactionType.slice(1)
 					}`}
