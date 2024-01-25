@@ -1,27 +1,11 @@
-"use client";
-
 import { getIncomes, getExpenses } from "@/lib/actions";
-import React, { useEffect, useState } from "react";
 import type { Transaction } from "@/lib/definitions";
 import Chart from "@/components/chart";
 import History from "@/components/history";
 
-export default function Page() {
-	const [incomes, setIncomes] = useState<Transaction[]>([]);
-	const [expenses, setExpenses] = useState<Transaction[]>([]);
-
-	useEffect(() => {
-		getIncomes()
-			.then(setIncomes)
-			.catch((error) => {
-				console.error("Error fetching incomes:", error);
-			});
-		getExpenses()
-			.then(setExpenses)
-			.catch((error) => {
-				console.error("Error fetching expenses:", error);
-			});
-	}, []);
+export default async function Page() {
+	const incomes: Transaction[] = await getIncomes();
+	const expenses: Transaction[] = await getExpenses();
 
 	const totalIncomes = incomes.reduce(
 		(total, income) => total + income.amount,

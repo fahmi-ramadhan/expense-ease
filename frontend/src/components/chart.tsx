@@ -1,3 +1,5 @@
+"use client";
+
 import { Transaction } from "@/lib/definitions";
 import { Line } from "react-chartjs-2";
 import {
