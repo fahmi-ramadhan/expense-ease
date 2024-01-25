@@ -16,9 +16,6 @@ export default function Page() {
 			.catch((error) => {
 				console.error("Error fetching incomes:", error);
 			});
-	}, []);
-
-	useEffect(() => {
 		getExpenses()
 			.then(setExpenses)
 			.catch((error) => {
