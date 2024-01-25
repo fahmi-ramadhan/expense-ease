@@ -40,7 +40,7 @@ export default function Page({
 			.catch((error) => {
 				console.error("Error fetching expenses:", error);
 			});
-	}, []);
+	}, [query]);
 
 	useEffect(() => {
 		setExpenses(

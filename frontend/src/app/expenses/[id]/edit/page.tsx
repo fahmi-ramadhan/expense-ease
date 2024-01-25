@@ -16,7 +16,7 @@ export default function Page({ params }: { params: { id: string } }) {
 			.catch((error) => {
 				console.error("Error fetching expenses:", error);
 			});
-	}, []);
+	}, [id]);
 
 	const handleUpdateExpense = async (
 		updatedExpense: Omit<Transaction, "id">
@@ -39,7 +39,7 @@ export default function Page({ params }: { params: { id: string } }) {
 					/>
 				</div>
 			) : (
-				<h1 className="text-2xl font-bold">Loading...</h1>
+				<h1 className="text-lg md:text-2xl font-bold">Loading...</h1>
 			)}
 		</div>
 	);

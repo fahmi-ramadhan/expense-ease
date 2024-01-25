@@ -16,7 +16,7 @@ export default function Page({ params }: { params: { id: string } }) {
 			.catch((error) => {
 				console.error("Error fetching incomes:", error);
 			});
-	}, []);
+	}, [id]);
 
 	const handleUpdateIncome = async (updatedIncome: Omit<Transaction, "id">) => {
 		const updatedIncomeData = await updateIncome(id, updatedIncome);
@@ -37,7 +37,7 @@ export default function Page({ params }: { params: { id: string } }) {
 					/>
 				</div>
 			) : (
-				<h1 className="text-2xl font-bold">Loading...</h1>
+				<h1 className="text-lg md:text-2xl font-bold">Loading...</h1>
 			)}
 		</div>
 	);
