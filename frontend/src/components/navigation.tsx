@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Navigation() {
 	const [isNavOpen, setIsNavOpen] = useState(false);
@@ -11,20 +11,6 @@ export default function Navigation() {
 	const toggleNav = () => {
 		setIsNavOpen(!isNavOpen);
 	};
-
-	useEffect(() => {
-		const checkWindowSize = () => {
-			if (window.innerWidth >= 768) {
-				setIsNavOpen(true);
-			} else {
-				setIsNavOpen(false);
-			}
-		};
-
-		window.addEventListener("resize", checkWindowSize);
-		checkWindowSize();
-		return () => window.removeEventListener("resize", checkWindowSize);
-	}, []);
 
 	const currentPage = () => {
 		if (pathName === "/") {
@@ -61,23 +47,25 @@ export default function Navigation() {
 					<i className="fa-solid fa-bars"></i>
 				</button>
 			</div>
-			{(isNavOpen || window.innerWidth >= 768) && (
-				<div className="flex flex-col grow bg-gray-100 border-2 border-white shadow-md p-2 sm:p-4 sm:gap-2 rounded-xl bg-opacity-80 mt-2 sm:mt-4 md:mt-0">
-					{tabs.map((tab) => (
-						<Link
-							key={tab.href}
-							href={tab.href}
-							className="grid grid-cols-[30px,auto] items-center my-2 font-medium cursor-pointer pl-4 relative"
-						>
-							{tab.text === currentPage() && (
-								<div className="absolute left-0 top-0 w-1 h-full bg-gray-900 rounded-md"></div>
-							)}
-							<i className={tab.icon}></i>
-							<p>{tab.text}</p>
-						</Link>
-					))}
-				</div>
-			)}
+			<div
+				className={`flex flex-col grow bg-gray-100 border-2 border-white shadow-md p-2 sm:p-4 sm:gap-2 rounded-xl bg-opacity-80 mt-2 sm:mt-4 md:mt-0 ${
+					isNavOpen || "hidden md:flex"
+				}`}
+			>
+				{tabs.map((tab) => (
+					<Link
+						key={tab.href}
+						href={tab.href}
+						className="grid grid-cols-[30px,auto] items-center my-2 font-medium cursor-pointer pl-4 relative"
+					>
+						{tab.text === currentPage() && (
+							<div className="absolute left-0 top-0 w-1 h-full bg-gray-900 rounded-md"></div>
+						)}
+						<i className={tab.icon}></i>
+						<p>{tab.text}</p>
+					</Link>
+				))}
+			</div>
 		</nav>
 	);
 }
