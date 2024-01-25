@@ -16,6 +16,30 @@ export default function FormFields({
 }) {
 	const { title, amount, category, description, date } = inputState;
 
+	const incomeOptions = [
+		{ value: "salary", label: "Salary" },
+		{ value: "freelancing", label: "Freelancing" },
+		{ value: "investments", label: "Investments" },
+		{ value: "stocks", label: "Stocks" },
+		{ value: "property", label: "Property" },
+		{ value: "bank", label: "Bank Transfer" },
+		{ value: "youtube", label: "Youtube" },
+		{ value: "other", label: "Other" },
+	];
+
+	const expenseOptions = [
+		{ value: "education", label: "Education" },
+		{ value: "food", label: "Food" },
+		{ value: "health", label: "Health" },
+		{ value: "subscriptions", label: "Subscriptions" },
+		{ value: "housing", label: "Housing" },
+		{ value: "clothing", label: "Clothing" },
+		{ value: "travelling", label: "Travelling" },
+		{ value: "other", label: "Other" },
+	];
+
+	const options = transactionType === "income" ? incomeOptions : expenseOptions;
+
 	return (
 		<>
 			<input
@@ -53,51 +77,15 @@ export default function FormFields({
 				<option value="" disabled>
 					Select Category
 				</option>
-				<option
-					value={transactionType === "income" ? "salary" : "education"}
-					className="text-black"
-				>
-					{transactionType === "income" ? "Salary" : "Education"}
-				</option>
-				<option
-					value={transactionType === "income" ? "freelancing" : "food"}
-					className="text-black"
-				>
-					{transactionType === "income" ? "Freelancing" : "Food"}
-				</option>
-				<option
-					value={transactionType === "income" ? "investments" : "health"}
-					className="text-black"
-				>
-					{transactionType === "income" ? "Investments" : "Health"}
-				</option>
-				<option
-					value={transactionType === "income" ? "stocks" : "subscriptions"}
-					className="text-black"
-				>
-					{transactionType === "income" ? "Stocks" : "Subscriptions"}
-				</option>
-				<option
-					value={transactionType === "income" ? "property" : "housing"}
-					className="text-black"
-				>
-					{transactionType === "income" ? "Property" : "Housing"}
-				</option>
-				<option
-					value={transactionType === "income" ? "bank" : "clothing"}
-					className="text-black"
-				>
-					{transactionType === "income" ? "Bank Transfer" : "Clothing"}
-				</option>
-				<option
-					value={transactionType === "income" ? "youtube" : "travelling"}
-					className="text-black"
-				>
-					{transactionType === "income" ? "Youtube" : "Travelling"}
-				</option>
-				<option value="other" className="text-black">
-					Other
-				</option>
+				{options.map((option) => (
+					<option
+						key={option.value}
+						value={option.value}
+						className="text-black"
+					>
+						{option.label}
+					</option>
+				))}
 			</select>
 			<textarea
 				name="description"

@@ -86,7 +86,7 @@ export default function TransactionItem({
 					</p>
 				</div>
 			</div>
-			<div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+			<div className="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:pr-2">
 				<Link href={`/${type}s/${id}/edit`}>
 					<i className="fa-solid fa-pen-to-square text-xl sm:text-2xl hover:text-gray-600"></i>
 				</Link>
@@ -95,7 +95,7 @@ export default function TransactionItem({
 						handleDelete(id);
 					}}
 				>
-					<i className="fa-solid fa-trash text-xl sm:text-2xl sm:pr-2 hover:text-gray-600"></i>
+					<i className="fa-solid fa-trash text-xl sm:text-2xl hover:text-gray-600"></i>
 				</button>
 			</div>
 		</div>

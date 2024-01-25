@@ -6,7 +6,7 @@ import type { Transaction } from "@/lib/definitions";
 import Chart from "@/components/chart";
 import History from "@/components/history";
 
-export default function Home() {
+export default function Page() {
 	const [incomes, setIncomes] = useState<Transaction[]>([]);
 	const [expenses, setExpenses] = useState<Transaction[]>([]);
 
