@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import Link from "next/link";
 import { FormField } from "@/lib/definitions";
 import FormFields from "@/components/form-fields";
+import { useRouter } from "next/navigation";
 
 export default function EditForm({
 	initialData,
@@ -14,9 +15,11 @@ export default function EditForm({
 }) {
 	const [inputState, setInputState] = useState<FormField>(initialData);
 
+	const router = useRouter();
+
 	useEffect(() => {
 		setInputState(initialData);
-	}, []);
+	}, [initialData]);
 
 	const handleInput =
 		(name: keyof FormField) =>
@@ -28,8 +31,10 @@ export default function EditForm({
 		};
 
 	const handleSubmit = async (e: FormEvent) => {
+		e.preventDefault();
 		try {
 			await updateTransaction(inputState);
+			router.push(`/${transactionType}s`);
 		} catch (error) {
 			console.error(
 				`An error occurred while updating the ${transactionType}:`,
@@ -39,11 +44,7 @@ export default function EditForm({
 	};
 
 	return (
-		<form
-			action={`/${transactionType}s`}
-			onSubmit={handleSubmit}
-			className="space-y-4"
-		>
+		<form onSubmit={handleSubmit} className="space-y-4">
 			<FormFields
 				transactionType={transactionType}
 				inputState={inputState}
