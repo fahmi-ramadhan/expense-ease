@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import Link from "next/link";
 import { FormField } from "@/lib/definitions";
 import FormFields from "@/components/form-fields";
@@ -21,15 +21,6 @@ export default function EditForm({
 		setInputState(initialData);
 	}, [initialData]);
 
-	const handleInput =
-		(name: keyof FormField) =>
-		(
-			e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-		) => {
-			const value = name === "amount" ? Number(e.target.value) : e.target.value;
-			setInputState({ ...inputState, [name]: value });
-		};
-
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
 		try {
@@ -48,7 +39,7 @@ export default function EditForm({
 			<FormFields
 				transactionType={transactionType}
 				inputState={inputState}
-				handleInput={handleInput}
+				setInputState={setInputState}
 			/>
 			<div className="mt-6 flex justify-end gap-4">
 				<Link

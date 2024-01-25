@@ -4,17 +4,25 @@ import { FormField } from "@/lib/definitions";
 export default function FormFields({
 	transactionType,
 	inputState,
-	handleInput,
+	setInputState,
 }: {
 	transactionType: "income" | "expense";
 	inputState: FormField;
-	handleInput: (
-		name: keyof FormField
-	) => (
-		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-	) => void;
+	setInputState: (inputState: FormField) => void;
 }) {
 	const { title, amount, category, description, date } = inputState;
+
+	const handleInput =
+		(name: keyof FormField) =>
+		(
+			e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+		) => {
+			let value = name === "amount" ? Number(e.target.value) : e.target.value;
+			if (name === "amount" && Number(value) < 0) {
+				value = 0;
+			}
+			setInputState({ ...inputState, [name]: value });
+		};
 
 	const incomeOptions = [
 		{ value: "salary", label: "Salary" },
@@ -57,7 +65,7 @@ export default function FormFields({
 				required
 				value={amount || ""}
 				type="number"
-				name={"amount"}
+				name="amount"
 				placeholder={`${
 					transactionType.charAt(0).toUpperCase() + transactionType.slice(1)
 				} Amount`}

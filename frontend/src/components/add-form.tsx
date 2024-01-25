@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { FormField } from "@/lib/definitions";
 import FormFields from "@/components/form-fields";
 
@@ -18,15 +18,6 @@ export default function Form({
 	};
 
 	const [inputState, setInputState] = useState<FormField>(initialInputState);
-
-	const handleInput =
-		(name: keyof FormField) =>
-		(
-			e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-		) => {
-			const value = name === "amount" ? Number(e.target.value) : e.target.value;
-			setInputState({ ...inputState, [name]: value });
-		};
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
@@ -50,7 +41,7 @@ export default function Form({
 			<FormFields
 				transactionType={transactionType}
 				inputState={inputState}
-				handleInput={handleInput}
+				setInputState={setInputState}
 			/>
 			<button className="p-2 bg-gray-800 text-white rounded-lg hover:bg-gray-600 w-1/2 text-sm">
 				{`Add ${
